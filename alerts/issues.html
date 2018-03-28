@@ -1,0 +1,59 @@
+<template name="issues">
+	<div class="container">
+		<h2><i class="history icon"></i> {{_ "alerts"}}</h2>
+		<div class="row box">
+			<div class="row">
+				<div class="ui tiny form">
+					<div class="col-md-6">
+						<p>
+							{{_ "from"}}
+							<div class="ui input">
+								<input id="startTime" type="text">
+							</div> 
+							{{_ "to"}}
+							<div class="ui input ">
+								<input id="endTime" type="text" >
+							</div>
+							<button class="ui button teal" style="margin-bottom:10px;" id="viewHistory">{{_ "view"}}</button>
+						</p>
+					</div>
+					<div class="col-md-6">
+						<div class="inline fields">
+							<div class="field">
+								<label>{{_ "status"}}</label>
+								<select id="selectStatus">
+									<option value="0">{{_ "all"}}</option>
+									<option value="1">{{_ "open"}}</option>
+									<option value="2">{{_ "close"}}</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>{{_ "type"}}</label>
+								<select id="selectType">
+									<option value="0">{{_ "all"}}</option>
+									<option value="1">{{_ "not_done"}}</option>
+									<option value="2">{{_ "late"}}</option>
+									<option value="3">{{_ "score_under"}}</option>
+								</select>
+							</div>
+							<div class="field">
+								<div class="ui checkbox mrg-left-1">
+									<input type="checkbox" tabindex="0" id="cbFlag">
+									<label>{{_ "only_flagged"}}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="mrg-btn2">
+
+			{{> reactiveTable settings=settings}}
+
+		</div>
+	</div>
+</template>
+
+<template name="noIssues">
+	{{_ "no_data_display"}}
+</template>

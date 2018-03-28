@@ -1,0 +1,78 @@
+<template name="issueDetail">
+	<div class="container">
+		<h2><i class="history icon"></i> {{_ "issue_detail"}}</h2>
+		<div class="ui active dimmer" id="loadingIssue">
+			<div class="ui text loader">{{_ "loading"}}</div>
+		</div>
+
+		<div class="row box">
+			<div class="row">
+				<div class="col-md-8">
+					<h2 class="ui header" style="margin-top: 0px !important;">{{gemba.name}}</h2>
+				</div>
+				<div class="col-xs-6 col-md-3 mrg-top">
+					{{#if alert.isClosed}}
+						<button class="ui button green" id="btnOpen">{{_ "reopen_issue"}}</button>
+					{{else}}
+						<button class="ui button red" id="btnClose">{{_ "close_issue"}}</button>
+					{{/if}}
+				</div>
+				<div class="col-xs-6 col-md-1 mrg-top">
+					<button class="ui icon {{inverted alert.flagged}} red button" id="btnFlag"><i class="flag icon"></i></button>
+				</div>
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-md-3 mrg-top">
+					{{#if alert.isClosed}}
+						<div class="ui red label labelDetail">
+							<i class="folder outline icon"></i> {{_ "closed"}}
+						</div>
+					{{else}}
+						<div class="ui teal label labelDetail">
+							<i class="folder open outline icon"></i> {{_ "open"}}
+						</div>
+					{{/if}}
+				</div>
+				<div class="col-md-6 mrg-top">
+					<div class="mrg-1">
+						<p class="titulo inlineText">{{_ "issue_appen_at"}} {{formatDate alert.date}}</p>
+					</div>
+				</div>
+				<div class="col-md-3 mrg-top">
+					<div class="mrg-1">
+						<p class="titulo inlineText">{{_ "status"}}:</p> <p class="inlineText"> {{labelStatus alert.type }}</p>
+					</div>
+				</div>
+			</div>
+			<hr>
+
+			<div class="ui celled list"> 
+				{{#each alert.messages}}
+					<div class="item itemDetail">
+						<img class="ui avatar image" src="{{getImagePath user}}">
+						<div class="content">
+							<div style="display: flex;">
+								<div class="header" syle="flex: 0 0 65%;"><p class="titulo">{{getUsername user}}</p></div>
+								<div syle=" flex: 1;">&nbsp;&nbsp;&nbsp;{{formatDate date}}</div> 
+							</div>
+							{{text}}
+						</div>
+					</div>
+				{{/each}}
+			</div>
+
+			<form class="ui form" id="formComment" data-id="{{alert._id}}">
+				<div class="field">
+					<p class="titulo">{{_ "comment"}}</p>
+					<textarea id="comment" name="comment"></textarea>
+				</div>
+
+				<div class="ui error message"></div>
+				<button class="ui button btnsave" type="submit">{{_ "save"}}</button>
+			</form>
+
+		</div>
+	</div>
+</template>
